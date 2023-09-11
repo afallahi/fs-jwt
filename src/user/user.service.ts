@@ -48,6 +48,12 @@ export class UserService {
         return user;
     }
 
+    async findOne(username: string): Promise<User | undefined> {
+        const user = await this.userModel.findOne({ username });
+        return user;
+    }
+
+
     getHello(): string {
         return 'Hello World!';
       }    
