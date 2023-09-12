@@ -1,4 +1,4 @@
 export interface LoginStatus {
-    username: string;
-    token: any;
+    access_token: any;
+    refresh_token: any;
 }
