@@ -21,7 +21,9 @@ Users enter their username and password to obtain access token which allows them
 - Docker
 - MongoDB
 - Swagger (link: base_url/api)
-- JWT (with Passport strategies)
+- JWT (access token, refresh token, Passport strategies)
+- Redis
+- Postman
 
 ## Test
 
