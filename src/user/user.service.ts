@@ -1,6 +1,6 @@
 import { InjectModel } from '@nestjs/mongoose';
 import { User, UserDocument } from './schemas/user.schema';
-import { HttpException, HttpStatus, Injectable, Logger } from '@nestjs/common';
+import { BadRequestException, HttpException, HttpStatus, Injectable, Logger } from '@nestjs/common';
 import { Model } from 'mongoose';
 import { LoginDto, RegisterDto } from 'src/auth/dto/auth.dto';
 import * as bcrypt from 'bcrypt';
@@ -12,7 +12,7 @@ export class UserService {
 
     constructor(@InjectModel(User.name) private userModel: Model<UserDocument>) {}
 
-    async create(userDto: RegisterDto): Promise<RegisterDto> {
+    async create(userDto: RegisterDto): Promise<any> {
 
         const { username, password } = userDto;
         const user = await this.userModel.findOne({ username });
@@ -50,7 +50,12 @@ export class UserService {
         return user;
     }
 
-    async findOne(username: string): Promise<User> {
+    async findOne(id: number): Promise<User> {
+        const user = await this.userModel.findOne({ id });
+        return user;
+    }
+
+    async findWithUsername(username: string): Promise<User> {
         const user = await this.userModel.findOne({ username });
         return user;
     }

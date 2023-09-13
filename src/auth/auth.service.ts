@@ -25,26 +25,11 @@ export class AuthService {
         private readonly refreshTokenStorage: RefreshTokenStorage,
         ) {}
 
-    async register(userDto: RegisterDto): Promise<RegistrationStatus> {
-        let status: RegistrationStatus = {
-            success: true,
-            message: 'user registered',
-        };
-
-        try {
-            await this.userService.create(userDto);
-        } catch (err) {
-            status = {
-                success: false,
-                message: err
-            }
-        }
-        
-        return status;
+    async register(userDto: RegisterDto) {
+        return await this.userService.create(userDto);
     }
 
     async login(userDto: LoginDto): Promise<LoginStatus> {
-
         const user = await this.validateUser(
             userDto.username,
             userDto.password,
@@ -54,9 +39,10 @@ export class AuthService {
             throw new UnauthorizedException('Invalid username or password');
 
         }
-        const accessToken = await this.signPayload(userDto);
-        const refreshToken = await this.jwtService.sign(userDto, {
-            expiresIn: '1d'
+        const payload = {sub: user.id, username: user.username}
+        const accessToken = await this.jwtService.signAsync(payload);
+        const refreshToken = await this.jwtService.signAsync(payload, {
+            expiresIn: process.env.JWT_REFRESH_TOKEN__EXPIRES_IN,
         });
 
         await this.refreshTokenStorage.insert(user.username, refreshToken); // TODO: change to user.id
@@ -80,13 +66,12 @@ export class AuthService {
     }
 
     async validateUser(username: string, password: string): Promise<any> {
-        const user = await this.userService.findOne(username);
+        const user = await this.userService.findWithUsername(username);
         const isPasswordValid = await bcrypt.compare(password, user.password);
         if ( user && isPasswordValid ) {
             const { password, ...result } = user;
             return result;
         }
-        this.logger.error(`Error: user is null`);
         return null;
     }
 
@@ -102,8 +87,16 @@ export class AuthService {
             const accessToken = await this.jwtService.signAsync(payload);
             return { access_token: accessToken };
         } catch (error) {
-            this.logger.error(`Error: ${error.message}`);
             throw new UnauthorizedException(`Invalid refresh token`);
+        }
+    }
+
+    async invalidateToken(accessToken: string): Promise<void> {
+        try {
+            const decodedToken = await this.jwtService.verifyAsync(accessToken);
+            await this.refreshTokenStorage.invalidate(decodedToken.sub);
+        } catch (error) {
+            throw new UnauthorizedException('Invalid access token');
         }
     }
 

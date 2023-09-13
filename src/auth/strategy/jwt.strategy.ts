@@ -16,17 +16,12 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
             ignoreExpiration: false,
             secretOrKey: process.env.JWT_SECRET_KEY
         })
-        this.logger.warn('init');
     }
 
     async validate(payload: JwtPayload): Promise<any> {
-        this.logger.warn(`Payload: ${JSON.stringify(payload)}`);
-        //const user = await this.userService.findOne(payload.username); //TODO: username wont be unique
-        const username = payload.username;
-        const user = await this.userModel.findOne({ username: username });  //TODO: This is temporary. userService is undefined. fix and use userService
+        const user = await this.userService.findOne(payload.sub);
 
         if (!user) {
-            this.logger.error('user not found');
             throw new UnauthorizedException();
         }
         return user;

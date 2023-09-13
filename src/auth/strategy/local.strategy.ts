@@ -11,7 +11,6 @@ export class LocalStrategy extends PassportStrategy(Strategy) {
 
     constructor(private authService: AuthService) {
         super();
-        this.logger.warn('LocalStrategy - init');
     }
 
     async validate(username: string, password: string): Promise<any> {

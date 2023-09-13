@@ -19,14 +19,11 @@ export class JwtRefreshTokenStrategy extends PassportStrategy(
             ignoreExpiration: false,
             secretOrKey: process.env.JWT_SECRET_KEY
         });
-        this.logger.warn('Jwt RefreshToken Strategy - init');
     }
 
     async validate(payload: JwtPayload): Promise<any> {
-        this.logger.warn(`Payload: ${JSON.stringify(payload)}`);
-        const user = await this.userService.findOne(payload.username);
+        const user = await this.userService.findOne(payload.sub);
         if (!user) {
-            this.logger.error('User not found');
             throw new UnauthorizedException();
           }
           return user;

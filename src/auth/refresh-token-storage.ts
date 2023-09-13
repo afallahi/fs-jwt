@@ -1,4 +1,4 @@
-import { Injectable, OnApplicationBootstrap, OnApplicationShutdown } from "@nestjs/common";
+import { Injectable, Logger, OnApplicationBootstrap, OnApplicationShutdown } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import Redis from 'ioredis';
 
@@ -6,6 +6,7 @@ export class InvalidatedRefreshTokenError extends Error {}
 
 @Injectable()
 export class RefreshTokenStorage implements OnApplicationBootstrap, OnApplicationShutdown {
+    private readonly logger = new Logger(RefreshTokenStorage.name);
 
     private redisClient: Redis;
     constructor(private configService: ConfigService) {}
