@@ -30,7 +30,8 @@ export class UserService {
 
         const newUser = new this.userModel(requestBody)
         await newUser.save();
-        return newUser;
+
+        return {statusCode: HttpStatus.CREATED, message: "user created"};
     }
 
     async findByLogin(userDto: LoginDto): Promise<LoginDto> {
