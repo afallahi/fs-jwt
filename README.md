@@ -28,4 +28,8 @@ Users enter their username and password to obtain access token which allows them
 
 ## Test
 
-User included Postman collection for testing and follow the above flow to obtain tokens, get access to protected resources, invalidate tokens, and use refresh token to get access token
+### Postman
+Use included Postman collection for testing and follow the above flow to obtain tokens, get access to protected resources, invalidate tokens, and use refresh token to get access token
+
+### Use Frontend APP
+Run React App
