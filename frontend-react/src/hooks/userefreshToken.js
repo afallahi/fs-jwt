@@ -5,10 +5,15 @@ const REFRESH_URL = '/api/v1/auth/refresh-token';
 
 const useRefreshToken = () => {
 
-    const { setAuth } = useAuth();
+    const { auth, setAuth } = useAuth();
 
     const refresh = async () => {
-        const response = await axios.get(REFRESH_URL);
+        const response = await axios.post(REFRESH_URL,
+            JSON.stringify({ refresh_token: auth.refreshToken }), {
+                headers: {'Content-Type': 'application/json'}
+            }
+        );
+
 
         setAuth(prev => {
             return { ...prev, accessToken: response.data.accessToken }
