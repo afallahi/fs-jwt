@@ -1,8 +1,10 @@
+import Register from './Register';
+
 function App() {
 
   return (
     <main className="App">
-      <Hello World />
+      <Register />
     </main>
   );
 }

@@ -10,6 +10,7 @@
     "react-scripts": "5.0.0"
   },
   "scripts": {
+    "axios": "^0.24.0",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
