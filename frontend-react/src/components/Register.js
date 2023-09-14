@@ -1,5 +1,6 @@
 import { useRef, useState, useEffect } from "react";
-import axios from './api/axios';
+import axios from '../api/axios';
+import { Link } from "react-router-dom";
 
 const REGISTER_URL = "/api/v1/auth/register";
 
@@ -91,7 +92,7 @@ const Register = () => {
                             Already registered?
                             <br />
                             <span className="line">
-                                <a href="#">Login</a>
+                                <Link to="/login">Login</Link>
                             </span>
                         </p>
 
