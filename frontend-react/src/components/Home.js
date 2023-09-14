@@ -22,6 +22,9 @@ const Home = () => {
             <div className="flexGrow">
                 <button onClick={logout}>Log Out</button>
             </div>
+            <div className="flexGrow">
+                <Link to="/">Back</Link>
+            </div>
         </section>
         
     )

@@ -1,4 +1,3 @@
-import axios from "../api/axios";
 import useAxiosJWT from "../hooks/useAxiosJWT";
 import { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from "react-router-dom";
@@ -16,10 +15,9 @@ const Users = () => {
 
         const getUsers = async () => {
             try {
-                const response = await axios.get('/api/v1/user/all', {
+                const response = await axiosJwt.get('/api/v1/user/all', {
                     signal: controller.signal
                 });
-                console.log(response.data);
                 isMounted && setUsers(response.data);
             } catch (error) {
                 console.error(error);

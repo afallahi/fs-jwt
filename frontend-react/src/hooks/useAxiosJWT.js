@@ -1,7 +1,7 @@
-import useRefreshToken from "./userefreshToken";
+import useRefreshToken from "./useRefreshToken";
 import useAuth from './useAuth';
 import {useEffect} from "react";
-import axios from '../api/axios';
+import axiosJwt from '../api/axios';
 
 
 const useAxiosJWT = () => {
@@ -10,7 +10,7 @@ const useAxiosJWT = () => {
     const refresh = useRefreshToken();
 
     useEffect( () => {
-        const reqIntercept = axios.interceptors.request.use (
+        const reqIntercept = axiosJwt.interceptors.request.use (
             config => {
                 if (!config.headers['Authorization']) {
                     config.headers['Authorization'] = `Bearer ${auth?.accessToken}`
@@ -19,25 +19,27 @@ const useAxiosJWT = () => {
             }, (error) => Promise.reject(error)
         )
 
-        const resIntercept = axios.interceptors.response.use(
+        const resIntercept = axiosJwt.interceptors.response.use(
             response => response, async (error) => {
                 const prevRequest = error?.config;
                 if(error?.response?.status === 403 && !prevRequest?.sent) {
                     prevRequest.sent = true;
                     const newAccessToken = await refresh();
                     prevRequest.headers['Authorization'] = `Bearer ${newAccessToken}`;
-                    return axios(prevRequest);
+                    return axiosJwt(prevRequest);
                 }
                 return Promise.reject(error);
             }
         )
 
         return () => {
-            axios.interceptors.request.eject(reqIntercept);
-            axios.interceptors.response.eject(resIntercept);
+            axiosJwt.interceptors.request.eject(reqIntercept);
+            axiosJwt.interceptors.response.eject(resIntercept);
         }
 
     }, [auth, refresh])
+
+    return axiosJwt;
 
 }
 
