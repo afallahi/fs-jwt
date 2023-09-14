@@ -7,6 +7,92 @@
 	},
 	"item": [
 		{
+			"name": "Protected Calls",
+			"item": [
+				{
+					"name": "Get all users (protected)",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2OTQ3MDQ5MjMsImV4cCI6MTY5NDcwNDk4M30.nJ6JXbA_2UPN2EVznWfiJCOkGgCUjJH37EbYiTnvw-M",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/user/all",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get posts (protected)",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2OTQ1NzI4NTgsImV4cCI6MTY5NDU3MjkxOH0.QgwaLold8j20UrHmXz37mbblF7r9qfE6whC2mwE5GKk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/post",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"post"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "Register User",
 			"request": {
 				"method": "POST",
@@ -21,12 +107,10 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/api/v1/auth/register",
-					"protocol": "http",
+					"raw": "{{base_url}}/api/v1/auth/register",
 					"host": [
-						"localhost"
+						"{{base_url}}"
 					],
-					"port": "3000",
 					"path": [
 						"api",
 						"v1",
@@ -44,7 +128,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"username\": \"user14\",\n    \"password\": \"user14\"\n}",
+					"raw": "{\n    \"username\": \"user3\",\n    \"password\": \"user3\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -52,58 +136,15 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/api/v1/auth/login",
-					"protocol": "http",
+					"raw": "{{base_url}}/api/v1/auth/login",
 					"host": [
-						"localhost"
+						"{{base_url}}"
 					],
-					"port": "3000",
 					"path": [
 						"api",
 						"v1",
 						"auth",
 						"login"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Get posts",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2OTQ1NzI4NTgsImV4cCI6MTY5NDU3MjkxOH0.QgwaLold8j20UrHmXz37mbblF7r9qfE6whC2mwE5GKk",
-							"type": "string"
-						}
-					]
-				},
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:3000/post",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"post"
 					]
 				}
 			},
@@ -134,12 +175,10 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/api/v1/auth/refresh-token",
-					"protocol": "http",
+					"raw": "{{base_url}}/api/v1/auth/refresh-token",
 					"host": [
-						"localhost"
+						"{{base_url}}"
 					],
-					"port": "3000",
 					"path": [
 						"api",
 						"v1",
@@ -166,12 +205,10 @@
 				"method": "POST",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3000/api/v1/auth/invalidate-token",
-					"protocol": "http",
+					"raw": "{{base_url}}/api/v1/auth/invalidate-token",
 					"host": [
-						"localhost"
+						"{{base_url}}"
 					],
-					"port": "3000",
 					"path": [
 						"api",
 						"v1",

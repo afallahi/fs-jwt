@@ -20,6 +20,7 @@ function App() {
         {/* protected routes */}
         <Route element={<RequiredAuth />}>
           <Route path="/" element={<Home />} />
+          <Route path="/home" element={<Home />} />
         </Route>
       </Route>
     </Routes>

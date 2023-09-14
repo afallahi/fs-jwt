@@ -19,13 +19,7 @@ export class AuthController {
     @Public()
     @Post('register')
     async register(@Body() userDto: RegisterDto) {
-        //const res = await this.authService.register(userDto);
         return await this.authService.register(userDto);
-        // if (!res.success) {
-        //     throw new HttpException(res.message, HttpStatus.BAD_REQUEST);
-        // }
-
-        // return res;
     }
 
     @Public()

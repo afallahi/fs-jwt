@@ -11,7 +11,7 @@ const LandingPage = () => {
 
             <br />
             <p>Protected</p>
-            <Link to="/">Home</Link>
+            <Link to="/home">Home</Link>
 
         </section>
     )

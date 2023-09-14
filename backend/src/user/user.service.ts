@@ -61,6 +61,10 @@ export class UserService {
         return user;
     }
 
+    async getAllUsers(): Promise<any> {
+        const users = await this.userModel.find();
+        return users;
+    }
 
     getHello(): string {
         return 'Hello World!';
