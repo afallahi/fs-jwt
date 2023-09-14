@@ -66,9 +66,7 @@ const Register = () => {
                     <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"}>{errMsg}</p>
                     <h1>Register</h1>
                     <form onSubmit={handleSubmit}>
-                        <label htmlFor="username">
-                            Username:
-                        </label>
+                        <label htmlFor="username">Username:</label>
                         <input
                             type="text"
                             id="username"
@@ -79,9 +77,7 @@ const Register = () => {
                             required
                         />
 
-                        <label htmlFor="password">
-                            Password:
-                        </label>
+                        <label htmlFor="password">Password:</label>
                         <input 
                             type="password"
                             id="password"
