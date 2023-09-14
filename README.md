@@ -7,7 +7,7 @@
 
 ## Token-based Authentication
 
-![Screenshot](Nest_JWT.png)
+![Screenshot](./backend/Nest_JWT.png)
 
 Users enter their username and password to obtain access token which allows them to fetch protected resources without using their credentials. Refresh token allows users to get a new access token once it's expired/invalidated. 
 
@@ -24,6 +24,7 @@ Users enter their username and password to obtain access token which allows them
 - JWT (access token, refresh token, Passport strategies)
 - Redis
 - Postman
+- React
 
 ## Test
 
