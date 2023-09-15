@@ -34,11 +34,19 @@ Users enter their username and password to obtain access token which allows them
 - Redis
 - Postman
 - React
+- Redux
 
 ## Test
 
 ### Postman
 Use included Postman collection for testing and follow the above flow to obtain tokens, get access to protected resources, invalidate tokens, and use refresh token to get access token
 
+### Swagger
+Swagger is located in `base_url/api` and can be used to test the backend.
+
 ### Use Frontend APP
-Run React App
+- Run React App and confirm the protected route is not working before login. 
+- Register and then login to get the access tken.
+- Now you can call the protected page which uses access token for authorization to get the list of users and display.
+- Open Developers Tool and use the Back button in the App to keep calling the protected endpoint.
+- Confirm you get auth error in dev tool logs when access token expires followed by a request to get a new access token using refresh token. This is smooth for the end user and they can keep getting the api response.
