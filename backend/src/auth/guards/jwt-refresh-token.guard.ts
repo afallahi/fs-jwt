@@ -7,6 +7,7 @@ export class JwtRefreshTokenGuard extends AuthGuard('jwt-refresh-token') {
     private readonly logger = new Logger(JwtRefreshTokenGuard.name);
 
     canActivate(context: ExecutionContext) {
+      this.logger.log(`validate3`);
         return super.canActivate(context);
       }
 }
