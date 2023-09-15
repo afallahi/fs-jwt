@@ -16,10 +16,11 @@ function App() {
         <Route path="register" element={<Register />} />
         <Route path="landingpage" element={<LandingPage />} />
         <Route path="unauthorized" element={<Unauthorized />} />
+        <Route path="" element={<LandingPage />} />
 
         {/* protected routes */}
         <Route element={<RequiredAuth />}>
-          <Route path="/" element={<Home />} />
+          <Route path="/home" element={<Home />} />
         </Route>
       </Route>
     </Routes>

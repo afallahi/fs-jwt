@@ -79,6 +79,7 @@ export class AuthService {
     // Refresh Token
 
     async refreshAccessToken(refreshToken: string): Promise<{access_token: string}> {
+        this.logger.log(`Refresh Token: ${refreshToken}`);
         try {
             const decoded = await this.jwtService.verifyAsync(refreshToken);
             await this.refreshTokenStorage.validate(decoded.sub, refreshToken);

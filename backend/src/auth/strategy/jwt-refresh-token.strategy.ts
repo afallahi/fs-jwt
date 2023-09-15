@@ -15,13 +15,16 @@ export class JwtRefreshTokenStrategy extends PassportStrategy(
 
     constructor(private readonly userService: UserService, jwtService: JwtService) {
         super({
-            jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+            //jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+            jwtFromRequest: ExtractJwt.fromBodyField('refresh_token'),
             ignoreExpiration: false,
             secretOrKey: process.env.JWT_SECRET_KEY
         });
     }
 
-    async validate(payload: JwtPayload): Promise<any> {
+    async validate(request: Request, payload: JwtPayload): Promise<any> {
+        this.logger.log(`validate1`);
+        this.logger.log(`validate1: ${JSON.stringify(request)}`);
         const user = await this.userService.findOne(payload.sub);
         if (!user) {
             throw new UnauthorizedException();
