@@ -4,7 +4,7 @@ import { Routes, Route } from 'react-router-dom';
 import Layout from './components/Layout';
 import Home from './components/Home';
 import LandingPage from './components/LandingPage';
-import RequiredAuth from './components/RequireAuth';
+import RequireAuth from './components/RequireAuth';
 import Unauthorized from './components/Unauthorized';
 
 function App() {
@@ -19,7 +19,7 @@ function App() {
         <Route path="" element={<LandingPage />} />
 
         {/* protected routes */}
-        <Route element={<RequiredAuth />}>
+        <Route element={<RequireAuth />}>
           <Route path="/home" element={<Home />} />
         </Route>
       </Route>
